@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Browser - Современный безопасный браузер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: #5f6368;
+            margin-bottom: 30px;
+        }
+
+        .version {
+            background: #1a73e8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .download-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 20px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(26, 115, 232, 0.6);
+            background: linear-gradient(45deg, #0d47a1, #1a73e8);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 15px;
+        }
+
+        .screenshots {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .screenshot {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .requirements {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .requirements ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .requirements li {
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .requirements li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header, .download-section, .features, .screenshots, .requirements {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+            
+            .tagline {
+                font-size: 18px;
+            }
+            
+            .download-btn {
+                padding: 15px 30px;
+                font-size: 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .instructions {
+            background: #e7f3ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .instruction-step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .instruction-step:before {
+            content: counter(step);
+            counter-increment: step;
+            background: #1a73e8;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10px;
+            top: 0;
+        }
+
+        ol {
+            counter-reset: step;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1a73e8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Nexus Browser</div>
+            <div class="tagline">Современный, безопасный и быстрый браузер</div>
+            <div class="version">Версия 2025.1.0.0</div>
+        </header>
+
+        <section class="download-section">
+            <h1>Скачать Nexus Browser</h1>
+            <p>Нажмите кнопку ниже для загрузки установочного файла</p>
+            
+            <!-- Замените эту ссылку на вашу реальную ссылку Google Drive -->
+            <a href="https://drive.google.com/uc?export=download&id=ВАШ_ID_ФАЙЛА" 
+               class="download-btn" 
+               id="downloadLink">
+                Скачать бесплатно
+                <div class="loader" id="loader" style="display: none;"></div>
+            </a>
+            
+            <p>Размер файла: ~15 MB</p>
+            
+            <div class="warning">
+                ⚠️ <strong>Внимание:</strong> При скачивании Windows может предупредить о неизвестном издателе. 
+                Это нормально для новых программ. Нажмите "Дополнительно" и выберите "Выполнить в любом случае".
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Максимальная безопасность</h3>
+                <ul>
+                    <li>Встроенный антивирусный сканер</li>
+                    <li>Защита от фишинга и мошенников</li>
+                    <li>Блокировка опасных сайтов</li>
+                    <li>Контроль загрузок файлов</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Высокая скорость</h3>
+                <ul>
+                    <li>Быстрая загрузка страниц</li>
+                    <li>Эффективное кэширование</li>
+                    <li>Оптимизация для медленных сетей</li>
+                    <li>Поддержка аппаратного ускорения</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Удобный интерфейс</h3>
+                <ul>
+                    <li>Темная и светлая темы</li>
+                    <li>Настраиваемые вкладки</li>
+                    <li>Встроенный переводчик</li>
+                    <li>Менеджер закладок</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="screenshots">
+            <h2>Скриншоты интерфейса</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/400x250/1a73e8/ffffff?text=Главное+окно+браузера" alt="Главное окно браузера">
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/400x250/764ba2/ffffff?text=Настройки+безопасности" alt="Настройки безопасности">
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/400x250/667eea/ffffff?text=Темная+тема" alt="Темная тема">
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/400x250/4CAF50/ffffff?text=Менеджер+закладок" alt="Менеджер закладок">
+                </div>
+            </div>
+        </section>
+
+        <section class="requirements">
+            <h2>Системные требования</h2>
+            <ul>
+                <li><strong>Операционная система:</strong> Windows 7/8/10/11</li>
+                <li><strong>Процессор:</strong> 1 ГГц или быстрее</li>
+                <li><strong>Оперативная память:</strong> 512 МБ минимум, 1 ГБ рекомендуется</li>
+                <li><strong>Место на диске:</strong> 100 МБ свободного места</li>
+                <li><strong>Интернет:</strong> Требуется для работы браузера</li>
+                <li><strong>Разрешение экрана:</strong> 1024x768 минимум</li>
+            </ul>
+
+            <div class="instructions">
+                <h3>Как установить:</h3>
+                <ol>
+                    <li class="instruction-step">Скачайте файл по кнопке выше</li>
+                    <li class="instruction-step">Запустите установочный файл (.exe)</li>
+                    <li class="instruction-step">Разрешите программе вносить изменения</li>
+                    <li class="instruction-step">Следуйте инструкциям установщика</li>
+                    <li class="instruction-step">Готово! Запускайте Nexus Browser</li>
+                </ol>
+            </div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="#" class="social-link">Обратная связь</a>
+                <a href="#" class="social-link">Поддержка</a>
+                <a href="#" class="social-link">Обновления</a>
+            </div>
+            <p>© 2025 Nexus Browser. Все права защищены.</p>
+            <p>Это бесплатное программное обеспечение с открытым исходным кодом</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('downloadLink').addEventListener('click', function(e) {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'inline-block';
+            
+            // Скрываем индикатор загрузки через 3 секунды (на случай ошибки)
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 3000);
+        });
+
+        // Добавляем информацию о загрузке
+        window.addEventListener('load', function() {
+            // Показываем предупреждение о безопасности
+            console.log('Nexus Browser Download Page loaded');
+            
+            // Анимация для карточек
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Добавляем счетчик скачиваний (пример)s
+        let downloadCount = localStorage.getItem('nexusDownloads') || 0;
+        downloadCount++;
+        localStorage.setItem('nexusDownloads', downloadCount);
+        
+        // Показываем количество скачиваний (можно добавить на страницу)
+        console.log(`Всего скачиваний: ${downloadCount}`);
+    </script>
+</body>
+</html>
