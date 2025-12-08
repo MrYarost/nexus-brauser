@@ -141,12 +141,20 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .screenshot img {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .screenshot-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
         }
 
         .requirements {
@@ -227,6 +235,12 @@
             .features {
                 grid-template-columns: 1fr;
             }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
         }
 
         .warning {
@@ -236,6 +250,15 @@
             padding: 15px;
             margin: 20px 0;
             color: #856404;
+        }
+
+        .warning ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .warning li {
+            margin-bottom: 5px;
         }
 
         .instructions {
@@ -287,13 +310,18 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .counter {
+            margin-top: 20px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo">Nexus Browser</div>
-            <div class="tagline">Современный, безопасный браузер</div>
+            <div class="tagline">Современный браузер</div>
             <div class="version">Версия 2025.1.0</div>
         </header>
 
@@ -301,7 +329,6 @@
             <h1>Скачать Nexus Browser</h1>
             <p>Нажмите кнопку ниже для загрузки установочного файла</p>
             
-            <!-- Замените эту ссылку на вашу реальную ссылку Google Drive -->
             <a href="https://drive.google.com/uc?export=download&id=1Gc-5okiD452fRSvxavb1jA_tE0h81UyQ"
                class="download-btn" 
                id="downloadLink">
@@ -309,18 +336,22 @@
                 <div class="loader" id="loader" style="display: none;"></div>
             </a>
             
+            <div class="counter">
+                <p>📊 <span id="downloadCounter">0</span> пользователей уже скачали</p>
+            </div>
+            
             <p>Размер файла: ~100 MB</p>
             
-        <div class="warning">
-            ⚠️ <strong>Внимание:</strong> 
-            <ul style="margin-top: 10px; padding-left: 20px;">
-                <li>Windows может предупредить о неизвестном издателе</li>
-                <li>Нажмите "Подробнее" → "Выполнить в любом случае"</li>
-                <li>Браузер запускается 15-25 секунд (это нормально)</li>
-                <li>Могут появиться командные строки во время запуска</li>
-                <li>Не закрывайте их - они закроются автоматически</li>
-            </ul>
-        </div>
+            <div class="warning">
+                ⚠️ <strong>Внимание:</strong> 
+                <ul>
+                    <li>Windows может предупредить о неизвестном издателе</li>
+                    <li>Нажмите "Подробнее" → "Выполнить в любом случае"</li>
+                    <li>Браузер запускается 10-15 секунд (это нормально)</li>
+                    <li>Могут появиться командные строки во время запуска</li>
+                    <li>Не закрывайте их - они закроются автоматически</li>
+                </ul>
+            </div>
         </section>
 
         <section class="features">
@@ -351,15 +382,20 @@
             <div class="screenshot-grid">
                 <div class="screenshot">
                     <img src="https://i.ibb.co/TxkQfhxv/image.png" alt="Главное окно браузера">
+                    <div class="screenshot-caption">Главный интерфейс</div>
                 </div>
                 <div class="screenshot">
                     <img src="https://i.ibb.co/6JB7S9F9/image.png" alt="Настройки безопасности">
+                    <div class="screenshot-caption">Настройки безопасности</div>
                 </div>
                 <div class="screenshot">
                     <img src="https://i.ibb.co/DfdYd2rq/image.png" alt="Темная тема">
+                    <div class="screenshot-caption">Темная тема</div>
                 </div>
                 <div class="screenshot">
-                    <img src="https://i.ibb.co/Xf2Rxc30/icon.png" alt="Иконка браузера">
+                    <img src="https://via.placeholder.com/400x250/4CAF50/ffffff?text=Менеджер+закладок" 
+                         alt="Менеджер закладок">
+                    <div class="screenshot-caption">Менеджер закладок</div>
                 </div>
             </div>
         </section>
@@ -388,30 +424,42 @@
 
         <footer>
             <div class="social-links">
-                <a href="#" class="social-link">политика конфиденциальности</a>
-                <a href="https://t.me/MrYarost_bot" class="social-link">Поддержка</a>
-                <a href="#" class="social-link">Ошибки и вопросы</a>
+                <a href="privacy.html" class="social-link">Политика конфиденциальности</a>
+                <a href="https://t.me/MrYarost_bot" class="social-link">Поддержка в Telegram</a>
+                <a href="https://t.me/MrYarostTG_new" class="social-link">Канал автора</a>
             </div>
             <p>© 2025 Nexus Browser. Все права не защищены :)</p>
         </footer>
     </div>
 
     <script>
+        // Инициализация счетчика
+        let downloadCount = localStorage.getItem('nexusDownloads') || 0;
+        document.getElementById('downloadCounter').textContent = downloadCount;
+        
+        // Обработчик клика по кнопке скачивания
         document.getElementById('downloadLink').addEventListener('click', function(e) {
+            // Индикатор загрузки
             const loader = document.getElementById('loader');
             loader.style.display = 'inline-block';
             
-            // Скрываем индикатор загрузки через 3 секунды (на случай ошибки)
+            // Увеличиваем счетчик
+            downloadCount++;
+            localStorage.setItem('nexusDownloads', downloadCount);
+            
+            let counter = document.getElementById('downloadCounter');
+            counter.textContent = downloadCount;
+            counter.style.color = '#1a73e8';
+            counter.style.fontWeight = 'bold';
+            
             setTimeout(() => {
+                counter.style.color = '#666';
                 loader.style.display = 'none';
-            }, 3000);
+            }, 1000);
         });
 
-        // Добавляем информацию о загрузке
+        // Анимация при загрузке страницы
         window.addEventListener('load', function() {
-            // Показываем предупреждение о безопасности
-            console.log('Nexus Browser Download Page loaded');
-            
             // Анимация для карточек
             const cards = document.querySelectorAll('.feature-card');
             cards.forEach((card, index) => {
@@ -425,17 +473,6 @@
                 }, index * 200);
             });
         });
-
-        // Добавляем счетчик скачиваний (пример)s
-        let downloadCount = localStorage.getItem('nexusDownloads') || 0;
-        downloadCount++;
-        localStorage.setItem('nexusDownloads', downloadCount);
-        
-        // Показываем количество скачиваний (можно добавить на страницу)
-        console.log(`Всего скачиваний: ${downloadCount}`);
     </script>
 </body>
-
 </html>
-
-
