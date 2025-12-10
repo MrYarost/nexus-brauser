@@ -304,6 +304,35 @@
             margin-top: 20px;
             color: #666;
         }
+        /* Стили для скриншотов */
+        .screenshot-wide {
+            grid-column: span 2; /* Занимает 2 колонки в сетке */
+            aspect-ratio: 16 / 9; /* Соотношение 16:9 */
+        }
+        
+        .screenshot-square {
+            aspect-ratio: 1 / 1; /* Квадрат 1:1 */
+        }
+        
+        /* Обновляем сетку для лучшего отображения */
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Для мобильных устройств делаем все скриншоты в один столбец */
+        @media (max-width: 768px) {
+            .screenshot-wide {
+                grid-column: span 1; /* На мобильных занимает одну колонку */
+                aspect-ratio: 16 / 9;
+            }
+            
+            .screenshot-square {
+                aspect-ratio: 1 / 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -458,4 +487,5 @@
     </script>
 </body>
 </html>
+
 
